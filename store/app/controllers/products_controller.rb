@@ -1,11 +1,14 @@
 class ProductsController < ApplicationController
+  before_action :set_product, only: %i[ show edit update ]
+
   def index
     @products = Product.all
   end
 
   def show
-    @product = Product.find(params[:id])
   end
+
+
 
   def new
     @product = Product.new
@@ -20,7 +23,23 @@ class ProductsController < ApplicationController
     end
   end
 
-  private def product_params
-    params.expect(product: [ :name ])
+  def edit
   end
+
+  def update
+    if @product.update(product_params)
+      redirect_to @product
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  private
+    def product_params
+      params.expect(product: [ :name ])
+    end
+
+    def set_product
+      @product = Product.find(params[:id])
+    end
 end
