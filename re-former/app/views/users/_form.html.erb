@@ -1,0 +1,36 @@
+<%= form_with model: @user do |form| %>
+  <% if @user&.errors&.any? %>
+    <div>
+      <h2>
+        Errors:
+      </h2>
+
+      <ul>
+        <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <div class="field">
+    <%= form.label :username %><br>
+    <%= form.text_field :username, placeholder: "user123" %><br><br>
+
+    <%= form.label :email %><br>
+    <%= form.email_field :email,
+      placeholder: "user@example.com",
+      autocomplete: "email",
+      required: true
+    %><br><br>
+
+    <%= form.label :password %><br>
+    <%= form.password_field :password,
+      minlength: 8,
+      required: true,
+      placeholder: "Enter your password..."
+    %><br><br>
+
+    <%= form.submit "Create User" %>
+  </div>
+<% end %>
