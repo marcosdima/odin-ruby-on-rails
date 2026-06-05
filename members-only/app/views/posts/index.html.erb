@@ -1,2 +1,17 @@
-<h1>Posts#index</h1>
-<p>Find me in app/views/posts/index.html.erb</p>
+<h1>Posts</h1>
+
+<div>
+  Create
+  <%= link_to "New Post", new_post_path %>
+</div>
+
+<% if @posts.empty? %>
+  <p>No posts yet</p>
+<% else %>
+  <ul>
+    <% @posts.each do |post| %>
+      <dt><%= post.title %></dt>
+      <dd><%= post.content %></dd>
+    <% end %>
+  </ul>
+<% end %>
