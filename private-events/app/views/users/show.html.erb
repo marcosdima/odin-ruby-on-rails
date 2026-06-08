@@ -1,0 +1,11 @@
+<h1> <%= @user.username %>'s events</h1>
+
+<% unless @user_events.empty? %>
+  <div class="events_container">
+    <% @user_events.each do |e|%>
+      <p>Event</p>
+    <% end %>
+  </div>
+<% else %>
+  <p>No events to display.</p>
+<% end %>
