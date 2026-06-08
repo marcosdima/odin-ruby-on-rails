@@ -1,7 +1,8 @@
 class AddCreatorToEvent < ActiveRecord::Migration[8.1]
   def change
-    change_table :events do |t|
-      add_reference :events, :user, null: false, foreign_key: true
-    end 
+    add_reference :events,
+      :creator,
+      null: false,
+      foreign_key: { to_table: :users }
   end
 end
