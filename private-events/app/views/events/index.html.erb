@@ -1,5 +1,7 @@
 <h1>Events</h1>
 
+<%= link_to "Create New Event", new_event_path if user_signed_in? %>
+
 <% if @events.empty? %>
   <p>No events yet.</p>
 <% else %>
