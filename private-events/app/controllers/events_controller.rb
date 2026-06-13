@@ -7,6 +7,9 @@ class EventsController < ApplicationController
   end
 
   def show
+    @attendance = current_user.attendances.find_by(
+      attended_event: @event
+    ) if user_signed_in?
   end
 
   def new

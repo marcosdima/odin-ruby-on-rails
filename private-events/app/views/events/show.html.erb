@@ -1,9 +1,17 @@
 <h1>Event: <%= @event.title %> by <%= link_to @event.creator.username, @event.creator %></h1>
 
 <div class="event-info">
+
   <% if @event.description %>
     <p>Description: <%= @event.description %></p>
   <% end %>
   <p>Date: <%= @event.starts_at %></p>
   <p>Location: <%= @event.location %></p>
+
+  <% if @attendance %>
+    <%= button_to "Leave event", attendance_path(@attendance), method: :delete %>
+  <% else %>
+    <%= button_to "Attend", attendances_path(event_id: @event.id) %>
+  <% end %>
+
 </div>
