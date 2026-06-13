@@ -1,11 +1,40 @@
 <h1> <%= @user.username %>'s events</h1>
 
-<% unless @user_events.empty? %>
-  <ul class="events_container">
-    <% @user_events.each do |e|%>
-      <li><%= link_to e.title, e %></li>
-    <% end %>
-  </ul>
-<% else %>
-  <p>No events to display.</p>
-<% end %>
+<div class="created-events">
+  <h2>Created:</h2>
+  <% unless @user_events.empty? %>
+    <ul class="events_container">
+      <% @user_events.each do |e|%>
+        <li><%= link_to e.title, e %></li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>No created events.</p>
+  <% end %>
+</div>
+
+<div class="attended-events">
+  <h2>Attending:</h2>
+
+  <% unless @attended_events.empty? %>
+    <div class="past-events-container">
+      <h3>Past events:</h3>
+      <ul>
+        <% @attended_events.filter { |e| e.starts_at < Time.current }.each do |e|%>
+          <li><%= link_to e.title, e %></li>
+        <% end %>
+      </ul>
+    </div>
+
+    <div class="future-events-container">
+      <h3>Future events:</h3>
+      <ul>
+        <% @attended_events.filter { |e| e.starts_at >= Time.current }.each do |e|%>
+          <li><%= link_to e.title, e %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% else %>
+    <p>No events attending.</p>
+  <% end %>
+</div>

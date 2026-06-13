@@ -8,10 +8,24 @@
   <p>Date: <%= @event.starts_at %></p>
   <p>Location: <%= @event.location %></p>
 
-  <% if @attendance %>
-    <%= button_to "Leave event", attendance_path(@attendance), method: :delete %>
-  <% else %>
-    <%= button_to "Attend", attendances_path(event_id: @event.id) %>
-  <% end %>
+  <div class="attendance">
+    <% if @attendance %>
+      <%= button_to "Leave event", attendance_path(@attendance), method: :delete %>
+    <% else %>
+      <%= button_to "Attend", attendances_path(event_id: @event.id) %>
+    <% end %>
+  </div>
+
+  <div class="attendees">
+    <h2>Attendees:</h2>
+    <% if @event.attendees.empty? %>
+      <p>No attendees yet.</p>
+    <% else %>
+      <ul>
+        <% @event.attendees.each do |attendee| %>
+          <li><%= link_to attendee.username, attendee %></li>
+        <% end %>
+      </ul>
+    <% end %>
 
 </div>
