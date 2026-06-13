@@ -9,7 +9,10 @@ class Event < ApplicationRecord
   validates :location, presence: true, length: { minimum: 3, maximum: 50 }
   validates :starts_at, presence: true
   validate :starts_at_cannot_be_in_the_past
-  
+
+  scope :past, -> { where('starts_at < ?', Time.now) }
+  scope :future, -> { where('starts_at >= ?', Time.now) }
+
   private
     def starts_at_cannot_be_in_the_past
       if starts_at.present? && starts_at < Time.now
